@@ -1,0 +1,1357 @@
+1)day1
+
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.7.27-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db_name            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.08 sec)
+
+mysql> use db_name
+Database changed
+mysql> show tables
+    -> ^C
+mysql>
+mysql> create table product(pid int,pname varchar(120),quantity int);
+Query OK, 0 rows affected (0.66 sec)
+
+mysql> show tables
+    ->
+    -> ^C
+mysql> show tables;
++-------------------+
+| Tables_in_db_name |
++-------------------+
+| product           |
++-------------------+
+1 row in set (0.27 sec)
+
+mysql> desc product
+    -> ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| pid      | int(11)      | YES  |     | NULL    |       |
+| pname    | varchar(120) | YES  |     | NULL    |       |
+| quantity | int(11)      | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.06 sec)
+
+mysql> drop db_name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'db_name' at line 1
+mysql> drop db_name
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'db_name' at line 1
+mysql> show tables;
++-------------------+
+| Tables_in_db_name |
++-------------------+
+| product           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> drop database db_name;
+Query OK, 1 row affected (0.78 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> create database firstdb;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use firstdb
+Database changed
+mysql> create table product(pid int,pname varchar(120),quantity int);
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> drop table product;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table product(pid int,pname varchar(120),quantity int);
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| product           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> drop table product;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table product(pid int,pname varchar(120),quantity int);
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> alter table firstdb add column price int;
+ERROR 1146 (42S02): Table 'firstdb.firstdb' doesn't exist
+mysql> alter table product add column price int;
+Query OK, 0 rows affected (0.92 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc first_db;
+ERROR 1146 (42S02): Table 'firstdb.first_db' doesn't exist
+mysql> desc product;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| pid      | int(11)      | YES  |     | NULL    |       |
+| pname    | varchar(120) | YES  |     | NULL    |       |
+| quantity | int(11)      | YES  |     | NULL    |       |
+| price    | int(11)      | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table product change pid productid int;
+Query OK, 0 rows affected (0.42 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| productid | int(11)      | YES  |     | NULL    |       |
+| pname     | varchar(120) | YES  |     | NULL    |       |
+| quantity  | int(11)      | YES  |     | NULL    |       |
+| price     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table product change pid productid varchar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table product change pid productid int;
+ERROR 1054 (42S22): Unknown column 'pid' in 'product'
+mysql>
+mysql>
+mysql> drop column pname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column pname' at line 1
+mysql> alter table product drop column quantity;
+Query OK, 0 rows affected (0.81 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| productid | int(11)      | YES  |     | NULL    |       |
+| pname     | varchar(120) | YES  |     | NULL    |       |
+| price     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> rename product to productdetails;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product to productdetails' at line 1
+mysql> rename table product to productdetails;
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> desc product;
+ERROR 1146 (42S02): Table 'firstdb.product' doesn't exist
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| productdetails    |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> desc productdetails;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| productid | int(11)      | YES  |     | NULL    |       |
+| pname     | varchar(120) | YES  |     | NULL    |       |
+| price     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> rename database firstdb to forstdb1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database firstdb to forstdb1' at line 1
+mysql> insert into productdetails(productid,pname,price) values(1,'abc',23);
+Query OK, 1 row affected (2.05 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| productdetails    |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> show table productdetails;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'productdetails' at line 1
+mysql> display table productdetails;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'display table productdetails' at line 1
+mysql> desc productdetails;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| productid | int(11)      | YES  |     | NULL    |       |
+| pname     | varchar(120) | YES  |     | NULL    |       |
+| price     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into productdetails(productid,pname,price) values(2,'pen',230);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | abc   |    23 |
+|         2 | pen   |   230 |
++-----------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into productdetails(3,'ifg',300);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3,'ifg',300)' at line 1
+mysql> insert into productdetails values(3,'ifg',300);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | abc   |    23 |
+|         2 | pen   |   230 |
+|         3 | ifg   |   300 |
++-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into productdetails(productid,price) values(5,600);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select 8 from productdetails;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
+| 8 |
+| 8 |
++---+
+4 rows in set (0.00 sec)
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | abc   |    23 |
+|         2 | pen   |   230 |
+|         3 | ifg   |   300 |
+|         5 | NULL  |   600 |
++-----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into productdetails(productid,pname,price) values(4,'efew',67),(7,'erger',89),(4,'egge',90);
+Query OK, 3 rows affected (0.12 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | abc   |    23 |
+|         2 | pen   |   230 |
+|         3 | ifg   |   300 |
+|         5 | NULL  |   600 |
+|         4 | efew  |    67 |
+|         7 | erger |    89 |
+|         4 | egge  |    90 |
++-----------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update productdetails set quantity=100;
+ERROR 1054 (42S22): Unknown column 'quantity' in 'field list'
+mysql> update productdetails set price=100;
+Query OK, 7 rows affected (0.20 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | abc   |   100 |
+|         2 | pen   |   100 |
+|         3 | ifg   |   100 |
+|         5 | NULL  |   100 |
+|         4 | efew  |   100 |
+|         7 | erger |   100 |
+|         4 | egge  |   100 |
++-----------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> delete from productdetails;
+Query OK, 7 rows affected (0.13 sec)
+
+mysql> select * from productdetails;
+Empty set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| productdetails    |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> desc productdetails;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| productid | int(11)      | YES  |     | NULL    |       |
+| pname     | varchar(120) | YES  |     | NULL    |       |
+| price     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into productdetails values(1,'vwrf',89),
+    -> (2,'ev',90),(3,'mihj',76);
+Query OK, 3 rows affected (0.11 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | vwrf  |    89 |
+|         2 | ev    |    90 |
+|         3 | mihj  |    76 |
++-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select pname from  productdetails;
++-------+
+| pname |
++-------+
+| vwrf  |
+| ev    |
+| mihj  |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> create database employeedetails
+    -> ;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employeedetails    |
+| firstdb            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use employeedetails;
+Database changed
+mysql> create table empdet(eid int,name varchar(200),
+    -> mobileno int,dob date,
+    -> age int,doj date,bloodgroup varchar(50),
+    -> deptno int,salary int^C
+mysql> create table empdet(eid int,name varchar(200),
+    -> mobileno int unique^Cob date,
+mysql> create table empdet(eid int,name varchar(200) not null,
+    -> mobileno int unique,dob date not null,
+    -> age int,doj date,bloodgroup varchar(50),
+    -> deptno int,salary int,email varchar(250),gender varchar(100),primary key(eid));
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> desc employeedetails;
+ERROR 1146 (42S02): Table 'employeedetails.employeedetails' doesn't exist
+mysql> desc empdet;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| eid        | int(11)      | NO   | PRI | NULL    |       |
+| name       | varchar(200) | NO   |     | NULL    |       |
+| mobileno   | int(11)      | YES  | UNI | NULL    |       |
+| dob        | date         | NO   |     | NULL    |       |
+| age        | int(11)      | YES  |     | NULL    |       |
+| doj        | date         | YES  |     | NULL    |       |
+| bloodgroup | varchar(50)  | YES  |     | NULL    |       |
+| deptno     | int(11)      | YES  |     | NULL    |       |
+| salary     | int(11)      | YES  |     | NULL    |       |
+| email      | varchar(250) | YES  |     | NULL    |       |
+| gender     | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+
+mysql> alter table empdet add column designation varchar(30);
+Query OK, 0 rows affected (0.59 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc empdet;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| eid         | int(11)      | NO   | PRI | NULL    |       |
+| name        | varchar(200) | NO   |     | NULL    |       |
+| mobileno    | int(11)      | YES  | UNI | NULL    |       |
+| dob         | date         | NO   |     | NULL    |       |
+| age         | int(11)      | YES  |     | NULL    |       |
+| doj         | date         | YES  |     | NULL    |       |
+| bloodgroup  | varchar(50)  | YES  |     | NULL    |       |
+| deptno      | int(11)      | YES  |     | NULL    |       |
+| salary      | int(11)      | YES  |     | NULL    |       |
+| email       | varchar(250) | YES  |     | NULL    |       |
+| gender      | varchar(100) | YES  |     | NULL    |       |
+| designation | varchar(30)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> alter table empdet delete column designation varchar(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delete column designation varchar(30)' at line 1
+mysql> alter table empdet drop column designation varchar(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(30)' at line 1
+mysql> rename table empdet to employee;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> alter table empdet drop column designation varchar(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(30)' at line 1
+mysql> insert into employee values(1,'abc',123,23-4-1997);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values(1,'abc',123,23-4-1997,23,3-6-2000,'o+ve',10,80000,'surajui@gmail','male','clerk');
+ERROR 1292 (22007): Incorrect date value: '-1978' for column 'dob' at row 1
+mysql> insert into employee values(1,'abc',123,1978-6-17,23,2000-6-3,'o+ve',10,80000,'surajui@gmail','male','clerk');
+ERROR 1292 (22007): Incorrect date value: '1955' for column 'dob' at row 1
+mysql> insert into employee values(1,'abc',123,'1978-6-17',23,'2000-6-3','o+ve',10,80000,'surajui@gmail','male','clerk');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from employee;
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee values(2,'def',456,'1999-6-17',22,'2010-10-3','B+ve',20,8020,'sura@gmail','male','software developer');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into employee values(3,'ghi',789,'2000-6-17',22,'2010-10-3','B+ve',30,80020,'ghi@gmail','female','techsupport');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values(4,'jkl',123456789,'1965-6-17',32,'2011-10-3','A+ve',40,40000,'jkl@gmail','female','tester');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values(4,'jkl',1234567898,'1965-6-17',32,'2011-10-3','A+ve',40,40000,'jkl@gmail','female','tester');
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+mysql> insert into employee values(5,'jkl',1234567898,'1965-6-17',32,'2011-10-3','A+ve',40,40000,'jkl@gmail','female','tester');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values(6,'mno',123456789,'1945-6-17',33,'2013-10-3','A+ve',20,344000,'mno@gmail','female','HR');
+ERROR 1062 (23000): Duplicate entry '123456789' for key 'mobileno'
+mysql> insert into employee values(6,'mno',7795651615,'1945-6-17',33,'2013-10-3','A+ve',20,344000,'mno@gmail','female','HR');
+ERROR 1264 (22003): Out of range value for column 'mobileno' at row 1
+mysql> insert into employee values(6,'mno',779565165,'1945-6-17',33,'2013-10-3','A+ve',20,344000,'mno@gmail','female','HR');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values(7,'pqr',455476857,'1975-6-17',45,'2009-10-3','A-ve',10,994000,'pqr@gmail','female','manager');
+Query OK, 1 row affected (0.33 sec)
+
+mysql> insert into employee values(8,'stu',45544557,'1995-6-17',25,'2002-10-3','AB-ve',20,9894000,'stu@gmail','male','manager');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values(9,'vwx',4552357,'1997-6-17',22,'2012-10-3','B-ve',30,98000,'vwx@gmail','female','hr');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values(10,'iuhiu',4552342,'1997-6-17',22,'2012-10-3','o-ve',20,9000,'iuhiu@gmail','male','clerk');
+Query OK, 1 row affected (0.36 sec)
+
+mysql> select * from employee;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation        |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk              |
+|   2 | def   |        456 | 1999-06-17 |   22 | 2010-10-03 | B+ve       |     20 |    8020 | sura@gmail    | male   | software developer |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport        |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR                 |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager            |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager            |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr                 |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk              |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_employeedetails |
++---------------------------+
+| employee                  |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employeedetails    |
+| firstdb            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use firstdb
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| productdetails    |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from productdetails;
++-----------+-------+-------+
+| productid | pname | price |
++-----------+-------+-------+
+|         1 | vwrf  |    89 |
+|         2 | ev    |    90 |
+|         3 | mihj  |    76 |
++-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> truncate productdetails;
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> select * from productdetails;
+Empty set (0.00 sec)
+
+mysql> use employeedetails
+Database changed
+mysql> select * from employeedetails;
+ERROR 1146 (42S02): Table 'employeedetails.employeedetails' doesn't exist
+mysql> select * from employee;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation        |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk              |
+|   2 | def   |        456 | 1999-06-17 |   22 | 2010-10-03 | B+ve       |     20 |    8020 | sura@gmail    | male   | software developer |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport        |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR                 |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager            |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager            |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr                 |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk              |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> select distinct designation from employee;
++--------------------+
+| designation        |
++--------------------+
+| clerk              |
+| software developer |
+| techsupport        |
+| tester             |
+| HR                 |
+| manager            |
++--------------------+
+6 rows in set (0.11 sec)
+
+mysql> select distinct designation,deptno from employee;
++--------------------+--------+
+| designation        | deptno |
++--------------------+--------+
+| clerk              |     10 |
+| software developer |     20 |
+| techsupport        |     30 |
+| tester             |     40 |
+| HR                 |     20 |
+| manager            |     10 |
+| manager            |     20 |
+| hr                 |     30 |
+| clerk              |     20 |
++--------------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select bloodgroup as bg from employee;
++-------+
+| bg    |
++-------+
+| o+ve  |
+| B+ve  |
+| B+ve  |
+| A+ve  |
+| A+ve  |
+| A+ve  |
+| A-ve  |
+| AB-ve |
+| B-ve  |
+| o-ve  |
++-------+
+10 rows in set (0.07 sec)
+
+mysql> select eid empid from employee;
++-------+
+| empid |
++-------+
+|     1 |
+|     2 |
+|     3 |
+|    10 |
+|     9 |
+|     8 |
+|     4 |
+|     7 |
+|     6 |
+|     5 |
++-------+
+10 rows in set (0.03 sec)
+
+mysql> select bg from employee;
+ERROR 1054 (42S22): Unknown column 'bg' in 'field list'
+mysql> select bloodgroup from employee;
++------------+
+| bloodgroup |
++------------+
+| o+ve       |
+| B+ve       |
+| B+ve       |
+| A+ve       |
+| A+ve       |
+| A+ve       |
+| A-ve       |
+| AB-ve      |
+| B-ve       |
+| o-ve       |
++------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from bloodgroup where bloodgroup='A+ve';
+ERROR 1146 (42S02): Table 'employeedetails.bloodgroup' doesn't exist
+mysql> update employee set mobileno=789562 where eid=2;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation        |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk              |
+|   2 | def   |     789562 | 1999-06-17 |   22 | 2010-10-03 | B+ve       |     20 |    8020 | sura@gmail    | male   | software developer |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport        |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester             |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR                 |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager            |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager            |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr                 |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk              |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee where bloodgroup='A+ve';
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   6 | mno  |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 | 344000 | mno@gmail | female | HR          |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from employee where eid=2;
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from employee;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> select * from employee where eid=5;
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+1 row in set (0.07 sec)
+
+mysql> insert into employee ^C
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+day---->14-10-2019
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.27-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employeedetails    |
+| firstdb            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.40 sec)
+
+mysql> use employeedetails;
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_employeedetails |
++---------------------------+
+| employee                  |
++---------------------------+
+1 row in set (0.03 sec)
+
+mysql> select * from employee;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+9 rows in set (0.36 sec)
+
+mysql> select * from employee where deptno=20 and salary>100000;
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   6 | mno  | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail | female | HR          |
+|   8 | stu  |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+2 rows in set (0.33 sec)
+
+mysql> select name,salary where deptno=10 or deptno=20;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where deptno=10 or deptno=20' at line 1
+mysql> select name,salary from employee where deptno=10 or deptno=20;
++-------+---------+
+| name  | salary  |
++-------+---------+
+| abc   |   80000 |
+| mno   |  344000 |
+| pqr   |  994000 |
+| stu   | 9894000 |
+| iuhiu |    9000 |
++-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where designation='tester' and age=25;
+Empty set (0.00 sec)
+
+mysql> select * from employee where designation='tester' or salary>100000;
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   6 | mno  |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail | female | HR          |
+|   7 | pqr  |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail | female | manager     |
+|   8 | stu  |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select name,salary,age from employee where deptno=10 or 40 or 50;
++-------+---------+------+
+| name  | salary  | age  |
++-------+---------+------+
+| abc   |   80000 |   23 |
+| ghi   |   80020 |   22 |
+| jkl   |   40000 |   32 |
+| jkl   |   40000 |   32 |
+| mno   |  344000 |   33 |
+| pqr   |  994000 |   45 |
+| stu   | 9894000 |   25 |
+| vwx   |   98000 |   22 |
+| iuhiu |    9000 |   22 |
++-------+---------+------+
+9 rows in set (0.00 sec)
+
+mysql> select name,salary,age from employee where deptno=10 or deptno=40 or deptno=50;
++------+--------+------+
+| name | salary | age  |
++------+--------+------+
+| abc  |  80000 |   23 |
+| jkl  |  40000 |   32 |
+| jkl  |  40000 |   32 |
+| pqr  | 994000 |   45 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select name,salary,age from employee where deptno=10 or deptno=40 or deptno=70;
++------+--------+------+
+| name | salary | age  |
++------+--------+------+
+| abc  |  80000 |   23 |
+| jkl  |  40000 |   32 |
+| jkl  |  40000 |   32 |
+| pqr  | 994000 |   45 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select name,salary,age from employee where deptno=10 or deptno=40;
++------+--------+------+
+| name | salary | age  |
++------+--------+------+
+| abc  |  80000 |   23 |
+| jkl  |  40000 |   32 |
+| jkl  |  40000 |   32 |
+| pqr  | 994000 |   45 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where age>25 and bloodgroup='b+ve';
+Empty set (0.00 sec)
+
+mysql> select * from employee where designation!='tester';
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |       123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   6 | mno   | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr   | 455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |   4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |   4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee where not designation='tester';
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |       123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   6 | mno   | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr   | 455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |   4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |   4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select name from employee where designation='hr' or designation='tester' and salary>100000;
++------+
+| name |
++------+
+| mno  |
+| vwx  |
++------+
+2 rows in set (0.00 sec)
+
+mysql> select name from employee where (designation='hr' or designation='tester') and salary>100000;
++------+
+| name |
++------+
+| mno  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where designation!='software developer' and dept=40;
+ERROR 1054 (42S22): Unknown column 'dept' in 'where clause'
+mysql> select * from employee where designation!='software developer' and deptno=40;
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where designation!='tester' and deptno=40;
+Empty set (0.00 sec)
+
+mysql> select * from employee where not (designation='tester' and deptno=40);
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |       123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   6 | mno   | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr   | 455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |   4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |   4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from empployee where designation=clerks and (deptno=10 or deptno=40);
+ERROR 1146 (42S02): Table 'employeedetails.empployee' doesn't exist
+mysql> select * from employee where designation=clerks and (deptno=10 or deptno=40);
+ERROR 1054 (42S22): Unknown column 'clerks' in 'where clause'
+mysql> select * from employee where designation='clerks' and (deptno=10 or deptno=40);
+Empty set (0.00 sec)
+
+mysql> select * from employee where designation='clerk' and (deptno=10 or deptno=40);
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where deptno(40,50,70,80);
+ERROR 1305 (42000): FUNCTION employeedetails.deptno does not exist
+mysql> select * from employee where deptno in(40,50,70,80);
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where deptno in(40,10,10,80);
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail     | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail     | female | tester      |
+|   7 | pqr  |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 | 994000 | pqr@gmail     | female | manager     |
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where deptno in(40,10,70,80);
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail     | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail     | female | tester      |
+|   7 | pqr  |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 | 994000 | pqr@gmail     | female | manager     |
++-----+------+------------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where designation in('tester','hr');
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   6 | mno  |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 | 344000 | mno@gmail | female | HR          |
+|   9 | vwx  |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |  98000 | vwx@gmail | female | hr          |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where designation in ('tester','hr') or deptno in(20,30) and salary>100000;
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   6 | mno  |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail | female | HR          |
+|   8 | stu  |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
+|   9 | vwx  |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail | female | hr          |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where designation in ('tester','hr') or deptno in(20,30) and salary>40000;
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   3 | ghi  |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail | female | techsupport |
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail | female | tester      |
+|   6 | mno  |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail | female | HR          |
+|   8 | stu  |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
+|   9 | vwx  |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail | female | hr          |
++-----+------+------------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where (designation in ('tester','hr') or deptno in(20,30)) and salary>40000;
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   3 | ghi  |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail | female | techsupport |
+|   6 | mno  | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail | female | HR          |
+|   8 | stu  |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
+|   9 | vwx  |   4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail | female | hr          |
++-----+------+-----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where (designation in ('tester','hr') and deptno in(20,30)) and salary>40000;
++-----+------+-----------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+-----------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   6 | mno  | 779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 | 344000 | mno@gmail | female | HR          |
+|   9 | vwx  |   4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |  98000 | vwx@gmail | female | hr          |
++-----+------+-----------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee designation not in('tester','hr');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not in('tester','hr')' at line 1
+mysql> select * from employee where designation not in('tester','hr');
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |       123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   7 | pqr   | 455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|  10 | iuhiu |   4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where not designation in('tester','hr');
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno  | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |       123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |       789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   7 | pqr   | 455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu   |  45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|  10 | iuhiu |   4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+-----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where age in(20,25,30,40) and designation not in('tester');
++-----+------+----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary  | email     | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+|   8 | stu  | 45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail | male   | manager     |
++-----+------+----------+------------+------+------------+------------+--------+---------+-----------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> slect * from employee where age between 20 and 40;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect * from employee where age between 20 and 40' at line 1
+mysql> select * from employee where age between 20 and 40;
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc   |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi   |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx   |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
++-----+-------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+8 rows in set (0.08 sec)
+
+mysql> select * from employee where doj between '2017-1-1' and '2017-12-31';
+Empty set (0.00 sec)
+
+mysql> select * from employee where salary between 80000 and 100000;
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi  |      789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |  80020 | ghi@gmail     | female | techsupport |
+|   9 | vwx  |  4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |  98000 | vwx@gmail     | female | hr          |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where salary not between 80000 and 100000;
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email       | gender | designation |
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail   | female | tester      |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail   | female | tester      |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail   | female | HR          |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail   | female | manager     |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail   | male   | manager     |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail | male   | clerk       |
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql>
+
+
+mysql> select * from employee where salary between 80000 and 100000;
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi  |      789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |  80020 | ghi@gmail     | female | techsupport |
+|   9 | vwx  |  4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |  98000 | vwx@gmail     | female | hr          |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where salary not between 80000 and 100000;
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+| eid | name  | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email       | gender | designation |
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+|   4 | jkl   |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail   | female | tester      |
+|   5 | jkl   | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail   | female | tester      |
+|   6 | mno   |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail   | female | HR          |
+|   7 | pqr   |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail   | female | manager     |
+|   8 | stu   |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail   | male   | manager     |
+|  10 | iuhiu |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail | male   | clerk       |
++-----+-------+------------+------------+------+------------+------------+--------+---------+-------------+--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> insert into employee (eid,name) values (12,'defghi');
+ERROR 1364 (HY000): Field 'dob' doesn't have a default value
+mysql> insert into employee (eid,name,dob) values (12,'defghi','1997-7-29');
+Query OK, 1 row affected (0.53 sec)
+
+mysql> select * from employee;
++-----+--------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name   | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+--------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc    |        123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   3 | ghi    |        789 | 2000-06-17 |   22 | 2010-10-03 | B+ve       |     30 |   80020 | ghi@gmail     | female | techsupport |
+|   4 | jkl    |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   5 | jkl    | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |   40000 | jkl@gmail     | female | tester      |
+|   6 | mno    |  779565165 | 1945-06-17 |   33 | 2013-10-03 | A+ve       |     20 |  344000 | mno@gmail     | female | HR          |
+|   7 | pqr    |  455476857 | 1975-06-17 |   45 | 2009-10-03 | A-ve       |     10 |  994000 | pqr@gmail     | female | manager     |
+|   8 | stu    |   45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
+|   9 | vwx    |    4552357 | 1997-06-17 |   22 | 2012-10-03 | B-ve       |     30 |   98000 | vwx@gmail     | female | hr          |
+|  10 | iuhiu  |    4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |    9000 | iuhiu@gmail   | male   | clerk       |
+|  12 | defghi |       NULL | 1997-07-29 | NULL | NULL       | NULL       |   NULL |    NULL | NULL          | NULL   | NULL        |
++-----+--------+------------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+10 rows in set (0.06 sec)
+
+mysql> select * from employee where mobileno is null;
++-----+--------+----------+------------+------+------+------------+--------+--------+-------+--------+-------------+
+| eid | name   | mobileno | dob        | age  | doj  | bloodgroup | deptno | salary | email | gender | designation |
++-----+--------+----------+------------+------+------+------------+--------+--------+-------+--------+-------------+
+|  12 | defghi |     NULL | 1997-07-29 | NULL | NULL | NULL       |   NULL |   NULL | NULL  | NULL   | NULL        |
++-----+--------+----------+------------+------+------+------------+--------+--------+-------+--------+-------------+
+1 row in set (0.18 sec)
+
+mysql> select * from employee where name like(_j);
+ERROR 1054 (42S22): Unknown column '_j' in 'where clause'
+mysql> select * from employee where name like('_j');
+Empty set (0.06 sec)
+
+mysql> select * from employee where name like('_a');
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like(_'a');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''a')' at line 1
+mysql> select * from employee where name like('a');
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like('abc');
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where name like('z_');
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like('j_');
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like('j%');
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where name like('jk_');
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+| eid | name | mobileno   | dob        | age  | doj        | bloodgroup | deptno | salary | email     | gender | designation |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+|   4 | jkl  |  123456789 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
+|   5 | jkl  | 1234567898 | 1965-06-17 |   32 | 2011-10-03 | A+ve       |     40 |  40000 | jkl@gmail | female | tester      |
++-----+------+------------+------------+------+------------+------------+--------+--------+-----------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where name like 'a%';
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where name like 'a_';
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like '_i%';
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like '_b%';
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where name like '%l%l';
+Empty set (0.00 sec)
+
+mysql> select * from employee where name like '%u%u';
++-----+-------+----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+| eid | name  | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email       | gender | designation |
++-----+-------+----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+|  10 | iuhiu |  4552342 | 1997-06-17 |   22 | 2012-10-03 | o-ve       |     20 |   9000 | iuhiu@gmail | male   | clerk       |
++-----+-------+----------+------------+------+------------+------------+--------+--------+-------------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql>select * from employee where name like 's%p';
+
+mysql> select * from employee where name like 'a%' or 'q%';
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set, 1 warning (0.10 sec)
+
+mysql> select * from employee where name like 'a%' or 's%';
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |  80000 | surajui@gmail | male   | clerk       |
++-----+------+----------+------------+------+------------+------------+--------+--------+---------------+--------+-------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from employee where name like 'a%' or name like 's%';
++-----+------+----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+| eid | name | mobileno | dob        | age  | doj        | bloodgroup | deptno | salary  | email         | gender | designation |
++-----+------+----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+|   1 | abc  |      123 | 1978-06-17 |   23 | 2000-06-03 | o+ve       |     10 |   80000 | surajui@gmail | male   | clerk       |
+|   8 | stu  | 45544557 | 1995-06-17 |   25 | 2002-10-03 | AB-ve      |     20 | 9894000 | stu@gmail     | male   | manager     |
++-----+------+----------+------------+------+------------+------------+--------+---------+---------------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where name like ('a%' or 's%');
+Empty set, 6 warnings (0.08 sec)
+
+mysql> select name,salary from employee in deptno(10,20,30) and designation like 's%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in deptno(10,20,30) and designation like 's%'' at line 1
+mysql> select name,salary from employee deptno in(10,20,30) and designation like 's%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in(10,20,30) and designation like 's%'' at line 1
+mysql> select name,salary from employee where deptno in(10,20,30) and designation like 's%';
+Empty set (0.00 sec)
+
+
+mysql> select count(*) from employee;
++----------+
+| count(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.11 sec)
+
+mysql> select avg(salary) from employee;
++--------------+
+| avg(salary)  |
++--------------+
+| 1286557.7778 |
++--------------+
+1 row in set (0.09 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|     9894000 |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|        9000 |
++-------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
