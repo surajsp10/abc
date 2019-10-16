@@ -1,0 +1,65 @@
+1..
+
+
+
+
+
+2..
+ news :any;
+  constructor(private http: HttpClient) {
+    this.getNews();
+   }
+
+  ngOnInit() {
+  }
+  getNews() {
+    this.http.get<any>('https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey=1ddbfcd89a7748d88925e53cec5b8d4c').subscribe((data) => {
+      this.news = data.articles;
+
+    }, err => {
+      console.log(err);
+    }, () => {
+      console.log('news got sucessfully');
+    });
+  }
+
+
+
+3..
+
+<div class="body">
+
+ <div class=" card col-md-3 float-left card-body mt-3" *ngFor="let new of news" >
+     <img src="{{new.urlToImage}}" alt="" style="height: 200px">
+     <p style="height: 100px">{{new.title}}</p>
+ 
+ </div>
+ </div>
+
+
+4..
+https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=1ddbfcd89a7748d88925e53cec5b8d4c
+
+
+5..
+<div class="dropdown text-center mt-2">
+        <button class="btn btn-white btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/general">General</a>
+          <a class="dropdown-item" routerLink="/health">Health</a>
+          <a class="dropdown-item" routerLink="/sports">Sports</a>
+          <a class="dropdown-item" routerLink="/science">Science</a>
+          <a class="dropdown-item" routerLink="/business">Business</a>
+          <a class="dropdown-item" routerLink="/technology">Technology</a>
+          <a class="dropdown-item" routerLink="/entertainment">Entertainment</a>
+        </div>
+      </div>
+
+
+6.
+
+
+<app-newssource-dropdown></app-newssource-dropdown>
+
